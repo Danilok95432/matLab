@@ -12,12 +12,16 @@ interface FormValues {
   findDirect: string,
   countVariables: number,
   countTasks: number,
+  targetFuncFirst: number,
+  targetFuncSecond: number
 }
 
 const schema = Yup.object().shape({
   findDirect: Yup.string().required("Это поле обязательно"),
   countVariables: Yup.number().required("Это поле обязательно"),
   countTasks: Yup.number().required("Это поле обязательно"),
+  targetFuncFirst: Yup.number().required("Это поле обязательно"),
+  targetFuncSecond: Yup.number().required("Это поле обязательно"),
 });
 
 export const Form = () => {
@@ -64,16 +68,30 @@ export const Form = () => {
         </div>
         <div className={styles.formGroup}>
           <InputLabel htmlFor="countVariables">Количество переменных</InputLabel>
-          <TextField id="countVariables" variant="outlined" {...register("countVariables")}/>
+          <TextField type="number" id="countVariables" variant="outlined" {...register("countVariables")}/>
           {errors.countVariables && (
             <p className={styles.error}>{errors.countVariables.message}</p>
           )}
         </div>
         <div className={styles.formGroup}>
           <InputLabel htmlFor="countTasks">Количество выражений</InputLabel>
-          <TextField id="countTasks" variant="outlined" {...register("countTasks")}/>
+          <TextField type="number" id="countTasks" variant="outlined" {...register("countTasks")}/>
           {errors.countTasks && (
             <p className={styles.error}>{errors.countTasks.message}</p>
+          )}
+        </div>
+        <div className={styles.formGroup}>
+          <InputLabel htmlFor="targetFuncFirst">Первый коэффициент целевой функции</InputLabel>
+          <TextField type="number" id="targetFuncFirst" variant="outlined" {...register("targetFuncFirst")}/>
+          {errors.targetFuncFirst && (
+            <p className={styles.error}>{errors.targetFuncFirst.message}</p>
+          )}
+        </div>
+        <div className={styles.formGroup}>
+          <InputLabel htmlFor="targetFuncSecond">Второй коэффициент целевой функции</InputLabel>
+          <TextField type="number" id="targetFuncSecond" variant="outlined" {...register("targetFuncSecond")}/>
+          {errors.targetFuncSecond && (
+            <p className={styles.error}>{errors.targetFuncSecond.message}</p>
           )}
         </div>
         

@@ -6,7 +6,9 @@ import { resolve } from "../helpers/resolve"
 type PayloadStartProps = {
   findDirect: string
   countVariables: number
-  countTasks: number
+  countTasks: number,
+  targetFuncFirst: number,
+  targetFuncSecond: number
 }
 
 type PayloadTasksProps = {
@@ -14,7 +16,7 @@ type PayloadTasksProps = {
 }
 
 export interface resolutionState {
-  startData: { findDirect: string; countVariables: number; countTasks: number },
+  startData: { findDirect: string; countVariables: number; countTasks: number, targetFuncFirst: number, targetFuncSecond: number },
   tasksData: Tasks[],
   result: {
     solution: {
@@ -29,6 +31,8 @@ const initialState: resolutionState = {
     findDirect: "max",
     countVariables: 1,
     countTasks: 1,
+    targetFuncFirst: 0,
+    targetFuncSecond: 0
   },
   tasksData: [],
   result: {
