@@ -50,7 +50,6 @@ export const Form = () => {
         onSubmit={handleSubmit(onSubmit)}
         className={styles.resolveForm}
       >
-        <h2>Решение системы уравнений симплекс методом</h2>
         <div className={styles.formGroup}>
           <InputLabel id="findDirect">Что ищем (Макс/Мин)?</InputLabel>
           <Select 
