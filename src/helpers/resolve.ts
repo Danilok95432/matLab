@@ -1,9 +1,8 @@
 import { resolutionState } from "../store/resolution";
 
 export const resolve = (state: resolutionState) => {
-  const { countVariables, countTasks, targetFuncFirst, targetFuncSecond, findDirect } = state.startData;
+  const { countVariables, countTasks, targetFuncCoefficients, findDirect } = state.startData;
   const tasksData = state.tasksData;
-  const targetFuncCoefficients = [targetFuncFirst, targetFuncSecond];
 
   // Проверка входных данных
   if (countVariables <= 0 || countTasks <= 0 || tasksData.length !== countTasks) {
@@ -17,15 +16,15 @@ export const resolve = (state: resolutionState) => {
     index += 1;
     const row = [
       ...task.coefficients,
-      ...Array(countTasks).fill(0), // Слабые и искусственные переменные
+      ...Array(countTasks).fill(0), 
       task.freeMember,
     ];
 
     if (task.sign === '<=') {
-      row[countVariables + index] = 1; // slack variable
+      row[countVariables + index] = 1; 
     } else if (task.sign === '>=') {
-      row[countVariables + index] = -1; // surplus variable
-      row[countVariables + countTasks + index] = 1; // artificial variable
+      row[countVariables + index] = -1; 
+      row[countVariables + countTasks + index] = 1; 
     }
 
     tableau.push(row);
@@ -34,12 +33,12 @@ export const resolve = (state: resolutionState) => {
   // Строка целевой функции
   const objectiveRow = [
     ...targetFuncCoefficients,
-    ...Array(countTasks + countTasks).fill(0), // Для slack и artificial переменных
+    ...Array(countTasks + countTasks).fill(0), 
     0
   ];
 
   if (findDirect === 'min') {
-    objectiveRow.forEach((_val, index) => objectiveRow[index] *= -1); // Меняем знак для минимизации
+    objectiveRow.forEach((_val, index) => objectiveRow[index] *= -1); 
   }
 
   tableau.push(objectiveRow);
@@ -50,7 +49,7 @@ export const resolve = (state: resolutionState) => {
   while (!isOptimal) {
     // Поиск ведущего столбца
     let pivotColumnIndex = -1;
-    let maxAbsValue = 0; // Для хранения максимального по модулю значения
+    let maxAbsValue = 0; 
 
     if (findDirect === 'max') {
         // Ищем максимальный положительный коэффициент по модулю

@@ -7,8 +7,7 @@ type PayloadStartProps = {
   findDirect: string
   countVariables: number
   countTasks: number,
-  targetFuncFirst: number,
-  targetFuncSecond: number
+  targetFuncCoefficients: number[]
 }
 
 type PayloadTasksProps = {
@@ -16,7 +15,7 @@ type PayloadTasksProps = {
 }
 
 export interface resolutionState {
-  startData: { findDirect: string; countVariables: number; countTasks: number, targetFuncFirst: number, targetFuncSecond: number },
+  startData: { findDirect: string; countVariables: number; countTasks: number, targetFuncCoefficients: number[] },
   tasksData: Tasks[],
   result: {
     solution: {
@@ -31,8 +30,7 @@ const initialState: resolutionState = {
     findDirect: "max",
     countVariables: 1,
     countTasks: 1,
-    targetFuncFirst: 0,
-    targetFuncSecond: 0
+    targetFuncCoefficients: []
   },
   tasksData: [],
   result: {
